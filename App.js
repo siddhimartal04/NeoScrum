@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import MainTabScreen from "./screens/MainTabScreen";
+
 import { DrawerContent } from './screens/DrawerContent';
-import RootStackScreen from './screens/RootStackScreen';
+import LoginStack from './navigators/LoginStack';
+import RegistrationStack from './navigators/RegistrationStack';
+import HomeStack from './navigators/HomeStack';
+import AddAddressScreen from './screens/AddAddress';
 const Drawer = createDrawerNavigator();
 
 
@@ -12,12 +15,15 @@ function App() {
     
     <NavigationContainer>
 
-<RootStackScreen/>
-    {/* <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
 
-      <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
-      <Drawer.Screen name="Details" component={DetailsStackScreen} />
-    </Drawer.Navigator> */}
+    <Drawer.Navigator >
+
+    <Drawer.Screen name="Home" component={HomeStack} />
+
+      <Drawer.Screen name="Login" component={LoginStack} />
+      <Drawer.Screen name="Registration" component={RegistrationStack} />
+      <Drawer.Screen name="AddAddress" component={AddAddressScreen} />
+    </Drawer.Navigator>
   </NavigationContainer>
   
   );

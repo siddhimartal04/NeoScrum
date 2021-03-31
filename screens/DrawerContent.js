@@ -8,7 +8,7 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import HomeScreen from './HomeScreen'
-import DetailsScreen from './DetailsScreen'
+
 
 export function DrawerContent(props) {
 
@@ -59,8 +59,7 @@ export function DrawerContent(props) {
                                 />
                             )}
                             label="Add Feedback"
-                            onPress={() => {props.navigation.navigate('Details')}}
-                        />
+                               />
                     {/* </Drawer.Section> */}
 
                 </View>
