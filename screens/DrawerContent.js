@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect}from 'react';
 import { View, StyleSheet,Image ,Text} from 'react-native';
 
 import {
@@ -8,9 +8,12 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import HomeScreen from './HomeScreen'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { connect } from 'react-redux'
 
+import { handleLogout } from '../redux/userAction'
 
-export function DrawerContent(props) {
+ function DrawerContent(props) {
 
     
 
@@ -22,15 +25,19 @@ export function DrawerContent(props) {
                 <View style={styles.drawerContent}>
                     <View style={styles.userInfoSection}>
                         <View style={{flexDirection:'row',marginTop: 15}}>
-                            <Image 
-                                source={{
-                                    uri: 'https://api.adorable.io/avatars/50/abott@adorable.png'
-                                }}
-                                size={50}
-                            />
+                            
                             <View style={{marginLeft:15, flexDirection:'column'}}>
-                                <Text style={styles.title}>John Doe</Text>
-                                <Text style={styles.caption}>@j_doe</Text>
+                            { !props.isLogin ? 
+                        (<Text style={styles.title}>NeoStore</Text>) 
+                        : (
+                        <View style={{justifyContent:'center',alignItems:'center'}}>
+                            <Avatar size='large' containerStyle={{color:'red',backgroundColor:'lightgrey',height:130,width:130,borderRadius:100}} rounded icon={{name:"user", type: 'font-awesome'}} />
+                            <Text style={{fontSize:25,textAlign:'center'}}>
+                                {props.email}
+                            </Text>
+                        </View>)
+                    }               
+                                
                             </View>
                         </View>
 
@@ -41,25 +48,102 @@ export function DrawerContent(props) {
                         <DrawerItem 
                             icon={({color, size}) => (
                                 <Icon 
-                                name="dashboard" 
+                                name="home" 
                                 color={color}
                                 size={size}
                                 />
                             )}
-                            label="Dashboard"
+                            label="Home"
                             onPress={() => {props.navigation.navigate('Home')}}
                         />
-
+                                                <DrawerItem 
+                            icon={({color, size}) => (
+                                <Icon 
+                                name="user" 
+                                color={color}
+                                size={size}
+                                />
+                            )}
+                            label="Login"
+                            onPress={() => {props.navigation.navigate('Login')}}
+                        />
+                                                <DrawerItem 
+                            icon={({color, size}) => (
+                                <Icon 
+                                name="user" 
+                                color={color}
+                                size={size}
+                                />
+                            )}
+                            label="Registration"
+                            onPress={() => {props.navigation.navigate('Registration')}}
+                        />
                         <DrawerItem 
                             icon={({color, size}) => (
                                 <Icon 
-                                name="file-signature" 
+                                name="map" 
                                 color={color}
                                 size={size}
                                 />
                             )}
-                            label="Add Feedback"
+                            label="Add Address"
+                            onPress={() => {props.navigation.navigate('AddAddress')}}
+                        
                                />
+                      <DrawerItem 
+                            icon={({color, size}) => (
+                                <Icon 
+                                name="shopping-bag" 
+                                color={color}
+                                size={size}
+                                />
+                            )}
+                            label="All Products"
+                            onPress={() => props.navigation.navigate('ProductListingScreen',{item:{category:'All Products'}})} />
+                        
+                        {/* <DrawerItem 
+                            icon={({color, size}) => (
+                                <Icon 
+                                name="bed" 
+                                color={color}
+                                size={size}
+                                />
+                            )}
+                            label="Bed"
+                            onPress={() => props.navigation.navigate('ProductListingScreen',{item:{category:'bed'}})} />
+                        <DrawerItem 
+                            icon={({color, size}) => (
+                              <FontAwesome5
+                              name="couch" 
+                                color={color}
+                                size={size}
+                                />
+                            )}
+                            label="Sofa"
+                            onPress={() => props.navigation.navigate('ProductListingScreen',{item:{category:'sofa'}})} />
+                        <DrawerItem 
+                            icon={({color, size}) => (
+                                <Icon 
+                                name="table" 
+                                color={color}
+                                size={size}
+                                />
+                            )}
+                            label="Table"
+                            onPress={() => props.navigation.navigate('ProductListingScreen',{item:{category:'table'}})} />
+                        <DrawerItem 
+                            icon={({color, size}) => (
+                                <FontAwesome5
+                                name="chair" 
+                                color={color}
+                                size={size}
+                                />
+                            )}
+                            label="Chair"
+                            onPress={() => props.navigation.navigate('ProductListingScreen',{item:{category:'chair'}})} />
+                                                            
+ */}
+
                     {/* </Drawer.Section> */}
 
                 </View>
@@ -89,7 +173,7 @@ const styles = StyleSheet.create({
       paddingLeft: 20,
     },
     title: {
-      fontSize: 16,
+      fontSize: 36,
       marginTop: 3,
       fontWeight: 'bold',
     },
@@ -126,3 +210,21 @@ const styles = StyleSheet.create({
       paddingHorizontal: 16,
     },
   });
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(DrawerContent)
+const mapStateToProps = (state) => {
+    return {
+        isLogin: state.AuthUser.isLogin,
+        email: state.AuthUser.email,
+        firstName: state.AuthUser.firstName,
+        lastName: state.AuthUser.lastName
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleLogout : () => dispatch(handleLogout())
+    }
+}
