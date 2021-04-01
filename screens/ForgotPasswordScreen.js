@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import {globalStyles} from '../styles/globalStyles';
-
+import LinearGradient from 'react-native-linear-gradient';
 const forgotSchema = yup.object({
     email: yup.string().required('Please enter email').email('Enter valid email')
   });
@@ -34,10 +34,8 @@ return (
                     <View style={{margin:30, flex:1}}>
                         <View style={globalStyles.header}>
                             <Text style={{fontSize:40 , color:'black',marginTop:10}}>
-                               Neo
-                               <Text style={{color: 'red'}}>
-                                Store
-                                </Text>
+                               NeoStore
+                               
                             </Text>
                         </View>
                             <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
@@ -65,8 +63,8 @@ return (
          title="LOGIN"
          disabled={!isValid}
        /> */}
-
-                            <TouchableOpacity style={globalStyles.submitButton}
+         <LinearGradient colors={[ '#48CCCD','#a1c4fd']} style={globalStyles.submitButton}>
+                            <TouchableOpacity 
                                 onPress={()=>handleSubmit()}  disabled={!isValid}
                                 
                             >
@@ -74,6 +72,7 @@ return (
                                     SUBMIT
                                 </Text  >
                             </TouchableOpacity>
+                            </LinearGradient>
                             
 
                     </View>

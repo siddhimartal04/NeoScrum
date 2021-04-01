@@ -7,6 +7,7 @@ import SetPasswordScreen from '../screens/SetPasswordScreen';
 import RegistrationScreen from '../screens/RegistrationScreen';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ProductDetails from '../screens/ProductDetails';
 const HomeStack = createStackNavigator();
 
 const HomeStackScreen = ({navigation}) => (
@@ -27,7 +28,8 @@ const HomeStackScreen = ({navigation}) => (
             )
             }}/>
           <HomeStack.Screen name="ProductListingScreen" component={ProductListingScreen}/>
-       {/* <LoginStack.Screen name="SetPasswordScreen" component={SetPasswordScreen}/>
+          <HomeStack.Screen name="ProductDetails" component={ProductDetails}/> 
+ {/* <LoginStack.Screen name="SetPasswordScreen" component={SetPasswordScreen}/>
         <LoginStack.Screen name="RegistrationScreen" component={RegistrationScreen}/> */}
       
     </HomeStack.Navigator>

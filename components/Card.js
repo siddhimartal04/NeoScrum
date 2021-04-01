@@ -1,13 +1,17 @@
 import * as React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { View, Text,Button ,StyleSheet,TouchableWithoutFeedback,Image, ScrollView} from 'react-native';
-
+import { Rating } from 'react-native-ratings';
+import StarRating from 'react-native-star-rating';
 import Icon from 'react-native-vector-icons/FontAwesome';
 function Card({item}) {
+  const navigation = useNavigation();
   return (
 
     <View style={{marginBottom:20,marginTop:10}}>
   
-            <TouchableWithoutFeedback key={item.id} >
+            <TouchableWithoutFeedback key={item.id} onPress={() => navigation.navigate('ProductDetails',{item})}
+>
                 <View style={styles.container}>
                     <Image 
                     source={item.product_images}
@@ -20,10 +24,17 @@ function Card({item}) {
                                     {item.product_name}
                                 </Text>
                                 <Text style={{color:'grey',fontSize:16}}>{item.product_category}</Text>
-                                <Text style={{fontSize:18,fontWeight:'bold',color:'black'}}>
+                                <Text style={{fontSize:16,fontWeight:'bold',color:'black'}}>
                                     Rs.{item.product_price}
                                 </Text>
-                                <Text style={{fontSize:15,color:'black'}}>{item.rating} <Icon name="star" /></Text>
+                                <StarRating
+                                    maxStars={5}
+                                    rating={item.rating}
+                                    starSize={20}
+                                    fullStarColor={'gold'}
+                                    readonly={true}
+                                    
+                                />
                                 </View>
                         </View>
                     
@@ -48,7 +59,7 @@ function Card({item}) {
 export default Card;
 const styles = StyleSheet.create({
   container : {
-  marginTop:20,
+  marginTop:2,
   flex:1,
   flexDirection:'row',
   alignItems:'center',
@@ -71,9 +82,10 @@ const styles = StyleSheet.create({
   resizeMode:'stretch',
   },
   productNameStyles : {
-  fontSize:22,
-  alignSelf:'flex-start',
-  fontWeight:'bold'
+  fontSize:18,
+  marginTop:10,
+  fontWeight:'bold',
+ 
   },
   productTextStyle : {
 

@@ -8,7 +8,10 @@ import {Products} from '../data/Products'
 function ProductListingScreen({navigation}) {
     const route = useRoute();
     const {item} = route.params
-    const filteredData = Products.filter(product => product.product_category === item.category)
+    item.category != 'All Products' ? (
+        filteredData = Products.filter(product => product.product_category === item.category)
+   ) : ( filteredData = Products )
+    
     
 return (
     

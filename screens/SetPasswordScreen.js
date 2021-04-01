@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import {globalStyles} from '../styles/globalStyles';
-
+import LinearGradient from 'react-native-linear-gradient';
 const setSchema = yup.object({
     otp: yup.string().required('Please enter otp').matches(/^\d{4}$/, 'Must be a 4 digit number'),
     password: yup
@@ -53,10 +53,8 @@ return (
                     <View style={{margin:30, flex:1}}>
                         <View style={globalStyles.header}>
                             <Text style={{fontSize:40 , color:'black',marginTop:10}}>
-                               Neo
-                               <Text style={{color: 'red'}}>
-                                Store
-                                </Text>
+                               NeoStore
+                               
                             </Text>
                         </View>
                             <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
@@ -137,14 +135,16 @@ return (
                           />
                             </View>
                             {(errors.confirmpassword && touched.confirmpassword)  && <Text style={{ marginTop:5,color:'red',fontSize:18 }}>{errors.confirmpassword}</Text>}
-                
-                            <TouchableOpacity style={globalStyles.submitButton}
+                            <LinearGradient colors={[ '#48CCCD','#a1c4fd']} style={globalStyles.submitButton}>
+                           
+                            <TouchableOpacity 
                                 onPress={()=>handleSubmit()}  disabled={!isValid}
                             >
                                 <Text style={{fontSize:20, color:'white'}}>
                                     SUBMIT
                                 </Text  >
                             </TouchableOpacity>
+                            </LinearGradient>
                             
                             
                     </View>

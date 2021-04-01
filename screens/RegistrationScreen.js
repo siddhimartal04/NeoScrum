@@ -2,9 +2,12 @@ import React, {useState, useEffect} from 'react';
 import { View, Text,Button,ScrollView,StatusBar,TextInput ,StyleSheet,TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Formik} from 'formik';
+import { RadioButton, Checkbox } from 'react-native-paper'
 import * as yup from 'yup';
 import RadioForm from 'react-native-simple-radio-button';
 import CheckBox from 'react-native-check-box';
+import LinearGradient from 'react-native-linear-gradient';
+import {globalStyles} from '../styles/globalStyles';
 const registerSchema = yup.object({
     fname: yup
     .string()
@@ -58,6 +61,8 @@ function RegistrationScreen({navigation}) {
     const [securePassword, setSecurePassword] = useState(true);
     const [eyeicon, setEyeIcon] = useState('eye-slash');
     const [value, setValue] = useState('');
+    const [termsCondition , setTermsCondition] = useState(false)  
+
 
     const handleEyeClick = () => {
         setSecurePassword(!securePassword);
@@ -89,10 +94,7 @@ return (
                     <View style={{margin:30, flex:1}}>
                         <View style={styles.header}>
                             <Text style={{fontSize:40 , color:'black',marginTop:10}}>
-                               Neo
-                               <Text style={{color: 'red'}}>
-                                Store
-                                </Text>
+                               NeoStore
                             </Text>
                         </View>
                         <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
@@ -258,8 +260,22 @@ return (
                           />
                           </View>
                            {touched.gender &&errors.gender && (<Text style={{ marginTop:5,color:'red',fontSize:18 }}>{touched.gender && errors.gender}</Text>)}
-                          
-                           <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
+                           <View style={{justifyContent:'center',alignItems:'center'}}>
+<View style={styles.termConditionStyle}>
+<Checkbox
+status={termsCondition ? 'checked' : 'unchecked'}
+onPress={() => {
+setTermsCondition(!termsCondition);
+}}
+color="dodgerblue"
+/>
+<Text style={{fontSize:18}}>I agree the <Text style={{color:'dodgerblue',}}>{`Terms & Conditions`}</Text></Text>
+</View>
+{ !termsCondition ? (<Text style={{color:'red',fontSize:20}}>please agree with the terms </Text>) : (<Text></Text>)}
+
+
+</View>
+                           {/* <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
                                 <Text style={{fontSize:20, color:'black',marginTop:25}}>I agree the terms and conditions</Text>
                             
                             
@@ -269,10 +285,10 @@ return (
                                 
                                 value={values.acceptTerms}
                                 />
-                                </View>
+                                </View> */}
                             
-                            {(errors.lname && touched.lname)&& <Text style={{ marginTop:5,color:'red',fontSize:18}}>{errors.lname}</Text>}
-                            
+                            {/* {(errors.lname && touched.lname)&& <Text style={{ marginTop:5,color:'red',fontSize:18}}>{errors.lname}</Text>}
+                             */}
                                     {/* <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
                                         <View style={{alignContent:'center', flexDirection: 'row',marginTop:30}}>
                                                 <Text style={{fontSize:20, color:'black'}}>Gender</Text>
@@ -284,13 +300,16 @@ return (
                                     </RadioButton.Group>
                                     {(errors.gender && touched.gender)  && <Text style={{ marginTop:5,color:'red',fontSize:18 }}>{errors.gender}</Text>}
                                      */}
-                            <TouchableOpacity style={styles.submitButton}
+                                     <LinearGradient colors={[ '#48CCCD','#a1c4fd']} style={globalStyles.submitButton}>
+                           
+                            <TouchableOpacity 
                                 onPress={()=>handleSubmit()}  disabled={!isValid}
                             >
                                 <Text style={{fontSize:20, color:'white'}}>
-                                    Login
+                                    Register
                                 </Text  >
                             </TouchableOpacity>
+                            </LinearGradient>
                             
                             {/* <TouchableOpacity
                           onPress={() => {
@@ -338,4 +357,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    termConditionStyle : {
+      flexDirection:'row',
+      justifyContent:'center',
+      alignItems:'center',
+     
+  },
 });

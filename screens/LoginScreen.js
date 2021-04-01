@@ -2,9 +2,17 @@ import React, {useState, useEffect} from 'react';
 import { View, Text,Button,ScrollView,StatusBar,TextInput ,StyleSheet,TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Formik} from 'formik';
+import { useNavigation } from '@react-navigation/native'
+
+
 import * as yup from 'yup';
 import {globalStyles} from '../styles/globalStyles';
 import LinearGradient from 'react-native-linear-gradient';
+
+import { connect } from 'react-redux'
+
+import { handleUserLogin } from '../redux/userAction'
+import HomeScreen from './HomeScreen';
 
 const loginSchema = yup.object({
     email: yup.string().required('Please enter email').email('Enter valid email'),
@@ -16,8 +24,9 @@ const loginSchema = yup.object({
       .matches(/^[a-zA-Z0-9_]*$/, 'Must Be Alphanumeric'),
   });
 
-function LoginScreen({navigation}) {
-
+function LoginScreen(props) {
+ 
+  const navigation = useNavigation();
     const [securePassword, setSecurePassword] = useState(true);
     const [eyeicon, setEyeIcon] = useState('eye-slash');
 
@@ -29,12 +38,23 @@ function LoginScreen({navigation}) {
           setEyeIcon('eye-slash');
         }
       };
-
-
+  useEffect(()=>{
+  if (props.isLogin)
+  {
+    navigation.navigate('HomeScreen')
+    
+  }  
+},[props.isLogin])
 return (
     <Formik
         initialValues={{email: '', password: ''}}
-        validationSchema={loginSchema}>
+        validationSchema={loginSchema}
+        onSubmit={(values) => {
+          
+          props.handleUserLogin(values);
+         
+        }}
+       >
     {({
      handleChange,
      handleBlur,
@@ -104,7 +124,7 @@ return (
                             {(errors.password && touched.password)  && <Text style={{ marginTop:5,color:'red',fontSize:18 }}>{errors.password}</Text>}
                             <LinearGradient colors={[ '#48CCCD','#a1c4fd']} style={globalStyles.submitButton}>
                             <TouchableOpacity 
-                                onPress={()=>handleSubmit()}  disabled={!isValid}
+                                onPress={handleSubmit}  disabled={!isValid}
                             >
                                 <Text style={{fontSize:20, color:'white'}}>
                                     Login
@@ -155,5 +175,17 @@ return (
   );
 }
 
-export default LoginScreen;
 
+const mapStateToProps = (state) => {
+  return {
+      isLogin: state.AuthUser.isLogin
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      handleUserLogin: (data) => dispatch(handleUserLogin(data))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(LoginScreen);
