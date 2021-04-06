@@ -1,5 +1,5 @@
 
-import { LOGIN_ACTION, REGISTER_ACTION } from './types'
+import { LOGIN_ACTION, REGISTER_ACTION, LOGOUT_ACTION ,RETRIEVE_TOKEN} from './types'
 
 const UserLogin = (loginDetails) => {
     return {
@@ -9,21 +9,26 @@ const UserLogin = (loginDetails) => {
 }
 
 const UserRegistration = (registrationDetails) => {
+   
     return {
+        
         type : REGISTER_ACTION,
         payload : registrationDetails
     }
 }
 
+const UserLogout = () => {
+    return {
+        type : LOGOUT_ACTION
+    }
+}
+
 
 export const  handleUserLogin = (data) => {
-   
-
     return (dispatch) => {
         const loginDetails = {
             email: data.email,
             password: data.password,
-        
         }
         dispatch(UserLogin(loginDetails))
     }
@@ -32,14 +37,20 @@ export const  handleUserLogin = (data) => {
 export const  handleUserRegistration = (data) => {
     return (dispatch) => {
         const registrationDetails = {
-            firstName: data.firstName,
-            lastName: data.lastName,
+            fname: data.fname,
+            lname: data.lname,
             email: data.email,
             password: data.password,
-            confirmPassword: data.confirmPassword,
-            phoneNumber: data.phoneNo,
+            confirmpassword: data.confirmpassword,
+            phoneno: data.phoneno,
             gender: data.gender
         }
         dispatch(UserRegistration(registrationDetails))
+    }
+}
+
+export const handleLogout = () => {
+    return (dispatch) => {
+        dispatch(UserLogout())
     }
 }

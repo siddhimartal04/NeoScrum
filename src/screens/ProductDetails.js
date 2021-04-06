@@ -18,7 +18,13 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { useRoute } from '@react-navigation/native'
 import Modal from 'react-native-modal';
 import Share from 'react-native-share';
-const ProductDetail = () => {
+
+import { handleAddToCart } from '../redux/CartRedux/CartAction'
+import { Toast } from 'native-base';
+import { connect } from 'react-redux'
+const ProductDetail = (props) => {
+
+
     const MyCustomShare =async() => {
         const shareOptions ={
             message:'this is msg',
@@ -80,7 +86,27 @@ const ProductDetail = () => {
                             size={20}
                             color={'#f5f3f4'}
                             style={styles.icon}
-                            onPress={()=>{}}
+                            onPress={
+                                () => {
+                                    props.isLogin ? 
+                                        !props.cartItems.includes(item) 
+                                        ?
+                                        (
+                                            props.handleAddToCart(item)
+
+                                        )
+                                        : 
+                                        Toast.show({
+                                            text:'Product already added to cart',
+            
+                                        })
+                                    :
+                                    Toast.show({
+                                        text:'Need to login first'
+                                    })
+            
+                                 }
+                            }
                         />
                         <Swiper 
                             style={{height: 240,}}
@@ -113,7 +139,7 @@ const ProductDetail = () => {
                             <TouchableOpacity onPress={toggleModal} >
                                 <Text style={styles.buttonTitle}>RATE</Text>
                             </TouchableOpacity>
-                            <Modal isVisible={isModalVisible} style={{backgroundColor:'white',width:300,marginBottom:200,marginTop:150,marginLeft:50}}>
+                            <Modal isVisible={isModalVisible} style={{backgroundColor:'white',width:300,marginBottom:200,alignItems:'center',paddingTop:10,paddingBottom:10,paddingLeft:10,marginTop:150,marginLeft:50}}>
           <View style={{flex: 1,justifyContent:'space-between',alignItems:'center'}}>
             <Text style={styles.title}>{item.product_name}</Text>
             <Image 
@@ -202,7 +228,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 24,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        
     },
     category: {
         fontSize: 18,
@@ -292,4 +319,16 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ProductDetail
+const mapStateToProps = (state) => {
+    return {
+        cartItems: state.UserCart.cartItems,
+        isLogin: state.AuthUser.isLogin
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleAddToCart : (item) => dispatch(handleAddToCart(item))
+    }
+}
+export default connect(mapStateToProps , mapDispatchToProps)(ProductDetail)

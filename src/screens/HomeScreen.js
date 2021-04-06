@@ -40,6 +40,9 @@ function HomeScreen(props) {
                 placeholder="Search here.."
               />
             </View>
+            <View style={{borderBottomWidth:1,opacity:0.5, borderBottomColor:'grey',width:'100%'}}>
+            
+        </View>
           <View style={{marginTop:20}}>
             <FlatList
                         ListHeaderComponent={     <Carousel/>

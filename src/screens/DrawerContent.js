@@ -1,5 +1,5 @@
 import React ,{useEffect}from 'react';
-import { View, StyleSheet,Image ,Text} from 'react-native';
+import { View, StyleSheet,Image ,Text,TouchableWithoutFeedback} from 'react-native';
 
 import {
     DrawerContentScrollView,
@@ -31,8 +31,12 @@ import { handleLogout } from '../redux/userAction'
                         (<Text style={styles.title}>NeoStore</Text>) 
                         : (
                         <View style={{justifyContent:'center',alignItems:'center'}}>
-                            <Avatar size='large' containerStyle={{color:'red',backgroundColor:'lightgrey',height:130,width:130,borderRadius:100}} rounded icon={{name:"user", type: 'font-awesome'}} />
-                            <Text style={{fontSize:25,textAlign:'center'}}>
+                            <Image
+                                source={require('../assets/profilePic.jpeg')}
+                                style={{width:90,height:90}}
+                                
+                            />
+                                <Text style={{fontSize:25,textAlign:'center'}}>
                                 {props.email}
                             </Text>
                         </View>)
@@ -56,6 +60,8 @@ import { handleLogout } from '../redux/userAction'
                             label="Home"
                             onPress={() => {props.navigation.navigate('Home')}}
                         />
+                        {
+                        !props.isLogin ? (
                                                 <DrawerItem 
                             icon={({color, size}) => (
                                 <Icon 
@@ -66,7 +72,7 @@ import { handleLogout } from '../redux/userAction'
                             )}
                             label="Login"
                             onPress={() => {props.navigation.navigate('Login')}}
-                        />
+                        />):(null)}
                                                 <DrawerItem 
                             icon={({color, size}) => (
                                 <Icon 
@@ -78,6 +84,25 @@ import { handleLogout } from '../redux/userAction'
                             label="Registration"
                             onPress={() => {props.navigation.navigate('Registration')}}
                         />
+                                            {
+                        props.isLogin ? ( 
+                            <DrawerItem 
+                            icon={({color, size}) => (
+                                <Icon 
+                                name="user" 
+                                color={color}
+                                size={size}
+                                />
+                            )}
+                            label="My Cart"
+                            onPress={() => {props.navigation.navigate('MyCart')}}
+                        />
+                            
+                           
+                        ) : (
+                            null
+                         )
+                    }
                         <DrawerItem 
                             icon={({color, size}) => (
                                 <Icon 
@@ -100,7 +125,25 @@ import { handleLogout } from '../redux/userAction'
                             )}
                             label="All Products"
                             onPress={() => props.navigation.navigate('ProductListingScreen',{item:{category:'All Products'}})} />
-                        
+                        {
+                        props.isLogin ? ( 
+                            <DrawerItem 
+                            icon={({color, size}) => (
+                                <Icon 
+                                name="sign-out" 
+                                color={color}
+                                size={size}
+                                />
+                            )}
+                            label="Sign out"
+                            onPress={() => (props.handleLogout())} />
+                      
+                          
+                        ) : (
+                            null
+                         )
+                    }
+
                         {/* <DrawerItem 
                             icon={({color, size}) => (
                                 <Icon 
@@ -213,7 +256,7 @@ const styles = StyleSheet.create({
 
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(DrawerContent)
+
 const mapStateToProps = (state) => {
     return {
         isLogin: state.AuthUser.isLogin,
@@ -228,3 +271,4 @@ const mapDispatchToProps = (dispatch) => {
         handleLogout : () => dispatch(handleLogout())
     }
 }
+export default connect(mapStateToProps,mapDispatchToProps)(DrawerContent)

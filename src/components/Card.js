@@ -8,25 +8,30 @@ function Card({item}) {
   const navigation = useNavigation();
   return (
 
-    <View style={{marginBottom:20,marginTop:10}}>
+    <View style={{marginBottom:20}}>
   
             <TouchableWithoutFeedback key={item.id} onPress={() => navigation.navigate('ProductDetails',{item})}
 >
                 <View style={styles.container}>
+                  
                     <Image 
                     source={item.product_images}
                     style={styles.imageStyles}
                     />
                     <View style={styles.productTextStyle}>
-                      <View style={{flex:1,alignItems:'center',maxWidth:'75%'}}>
-                            <View>
+                      <View style={{flex:1,maxWidth:'75%'}}>
+                            
                                 <Text style={styles.productNameStyles}>
                                     {item.product_name}
                                 </Text>
-                                <Text style={{color:'grey',fontSize:16}}>{item.product_category}</Text>
-                                <Text style={{fontSize:16,fontWeight:'bold',color:'black'}}>
+                                <Text style={{color:'grey',fontSize:16,marginTop:10}}>{item.product_category}</Text>
+                               <View style={{flexDirection:'row',marginTop:10,justifyContent:'space-between'}}>
+                                  <Text style={{fontSize:16,fontWeight:'bold',color:'black'}}>
                                     Rs.{item.product_price}
-                                </Text>
+                                </Text>     
+
+
+
                                 <StarRating
                                     maxStars={5}
                                     rating={item.rating}
@@ -36,6 +41,8 @@ function Card({item}) {
                                     
                                 />
                                 </View>
+                               
+                                
                         </View>
                     
                     </View>
@@ -59,7 +66,7 @@ function Card({item}) {
 export default Card;
 const styles = StyleSheet.create({
   container : {
-  marginTop:2,
+  
   flex:1,
   flexDirection:'row',
   alignItems:'center',
@@ -68,7 +75,7 @@ const styles = StyleSheet.create({
   marginRight:10,
   backgroundColor: 'white',
   shadowColor:'#000',
-  
+  justifyContent:'space-between',
   shadowOpacity: 0.6,
   shadowRadius: 5,
   elevation: 7,
@@ -84,6 +91,7 @@ const styles = StyleSheet.create({
   productNameStyles : {
   fontSize:18,
   marginTop:10,
+  
   fontWeight:'bold',
  
   },
@@ -91,5 +99,6 @@ const styles = StyleSheet.create({
 
   flexGrow:1,
   
-  }
+  },
+
   })

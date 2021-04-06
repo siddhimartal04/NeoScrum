@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View,TouchableWithoutFeedback,Dimensions,Image,StyleSheet} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import {globalStyles} from '../styles/globalStyles';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
 
 const colors= [
@@ -30,7 +30,7 @@ const colors= [
     const navigation = useNavigation();
   
     return (
-   
+   <View style={globalStyles.container}>
 <View style={styles.wrapper}>
 <SwiperFlatList
    autoplay
@@ -48,6 +48,7 @@ const colors= [
            </TouchableWithoutFeedback>
        
      </View>
+     
   )}
  />
 {/* <View style={{backgroundColor:'grey',alignItems:'center',marginTop:30,paddingTop:20,paddingBottom:20}}>
@@ -56,6 +57,7 @@ const colors= [
 
 </Text>
 </View> */}
+</View>
 </View>
     );}
 export default Carousel;
@@ -69,6 +71,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     height:200,
+    marginBottom:30
   },
   child: { width, justifyContent: 'center' },
   text: { fontSize: width * 0.5, textAlign: 'center' },
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
   },
   imageStyle : {
     resizeMode:'stretch',
-    width:'100%',
+    width:'90%',
     height:'100%',
     borderRadius:6
 },

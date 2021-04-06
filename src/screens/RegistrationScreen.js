@@ -8,6 +8,10 @@ import RadioForm from 'react-native-simple-radio-button';
 import CheckBox from 'react-native-check-box';
 import LinearGradient from 'react-native-linear-gradient';
 import {globalStyles} from '../styles/globalStyles';
+import { useNavigation } from '@react-navigation/native'
+import { handleUserRegistration } from '../redux/userAction'
+import {connect} from 'react-redux'
+
 const registerSchema = yup.object({
     fname: yup
     .string()
@@ -30,8 +34,8 @@ const registerSchema = yup.object({
       .string()
       .required('Please enter confirm Password')
       .oneOf([yup.ref('password')], 'Must be same as password'),
-      radioOption:yup.string().required('choose one'),
-      acceptTerms: yup.bool().oneOf([true], 'Accept Terms & Conditions is required'),
+      // radioOption:yup.string().required('choose one'),
+      // acceptTerms: yup.bool().oneOf([true], 'Accept Terms & Conditions is required'),
       phoneno: yup
     .string()
     .required()
@@ -51,17 +55,17 @@ const registerSchema = yup.object({
     {label: 'Male', value: 0},
     {label: 'Female', value: 1},
   ];
-  var check_props = [
-    {label: 'Male', value: 0},
+  // var check_props = [
+  //   {label: 'Male', value: 0},
     
-  ];
+  // ];
 
-function RegistrationScreen({navigation}) {
-
+function RegistrationScreen(props) {
+  const navigation = useNavigation();
     const [securePassword, setSecurePassword] = useState(true);
     const [eyeicon, setEyeIcon] = useState('eye-slash');
-    const [value, setValue] = useState('');
-    const [termsCondition , setTermsCondition] = useState(false)  
+    // const [value, setValue] = useState('');
+    // const [termsCondition , setTermsCondition] = useState(false)  
 
 
     const handleEyeClick = () => {
@@ -73,11 +77,22 @@ function RegistrationScreen({navigation}) {
         }
       };
 
-
+      useEffect(()=>{
+        if (props.isLogin)
+        {
+          navigation.navigate('HomeScreen')
+          
+        }  
+      },[props.isLogin])
 return (
     <Formik
         initialValues={{fname:'',lname:'',email: '', password: '',confirmpassword:'',phoneno:'',gender:''}}
-        validationSchema={registerSchema}>
+        validationSchema={registerSchema}
+        onSubmit={(values) => {
+          console.log('test')
+          props.handleUserRegistration(values);
+         
+        }}>
     {({
      handleChange,
      handleBlur,
@@ -233,12 +248,13 @@ return (
                              
                             <Text style={{fontSize:20, color:'black'}}>Gender</Text>   
                             <RadioForm
+                            
                             style={{
                               flexDirection: 'row',
                               marginLeft:40,
                               marginTop:4
                             }}
-                            animation={true}
+                            animation={false}
                             labelStyle={{marginRight: 10}}
                             buttonSize={12}
                             buttonColor={'skyblue'}
@@ -260,7 +276,7 @@ return (
                           />
                           </View>
                            {touched.gender &&errors.gender && (<Text style={{ marginTop:5,color:'red',fontSize:18 }}>{touched.gender && errors.gender}</Text>)}
-                           <View style={{justifyContent:'center',alignItems:'center'}}>
+                           {/* <View style={{justifyContent:'center',alignItems:'center'}}>
 <View style={styles.termConditionStyle}>
 <Checkbox
 status={termsCondition ? 'checked' : 'unchecked'}
@@ -274,7 +290,7 @@ color="dodgerblue"
 { !termsCondition ? (<Text style={{color:'red',fontSize:20}}>please agree with the terms </Text>) : (<Text></Text>)}
 
 
-</View>
+</View> */}
                            {/* <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
                                 <Text style={{fontSize:20, color:'black',marginTop:25}}>I agree the terms and conditions</Text>
                             
@@ -303,7 +319,7 @@ color="dodgerblue"
                                      <LinearGradient colors={[ '#48CCCD','#a1c4fd']} style={globalStyles.submitButton}>
                            
                             <TouchableOpacity 
-                                onPress={()=>handleSubmit()}  disabled={!isValid}
+                                onPress={handleSubmit}  disabled={!isValid}
                             >
                                 <Text style={{fontSize:20, color:'white'}}>
                                     Register
@@ -327,7 +343,7 @@ color="dodgerblue"
   );
 }
 
-export default RegistrationScreen;
+
 
 const styles = StyleSheet.create({
     action: {
@@ -364,3 +380,19 @@ const styles = StyleSheet.create({
      
   },
 });
+
+
+const mapStateToProps = (state) => {
+  return {
+      isLogin: state.AuthUser.isLogin
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      handleUserRegistration : (data) => dispatch(handleUserRegistration(data))
+  }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(RegistrationScreen)

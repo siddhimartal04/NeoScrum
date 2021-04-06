@@ -6,6 +6,8 @@ import {globalStyles} from '../styles/globalStyles';
 import Card from '../components/Card';
 import {Products} from '../data/Products'
 import { Overlay } from 'react-native-elements';
+
+
 import { useNavigation } from '@react-navigation/native'
 
 let arr = []
@@ -13,33 +15,21 @@ function ProductListingScreen(props) {
     const navigation = useNavigation()
     const route = useRoute();
     const {item} = route.params
-   const [displayProducts, setDisplayProducts] = useState(null)
    const [visible, setVisible] = useState(false);
-   const [categoryList, setCategoryList] = useState([])
-
    const [bedActive, setBedActive] = item.category === 'bed' ? useState(true) :  useState(false)
    const [sofaActive, setSofaActive] = item.category === 'sofa' ? useState(true) : useState(false)
    const [chairActive, setChairActive] = item.category === 'chair' ? useState(true) : useState(false)
    const [tableActive, setTableActive] = item.category === 'table' ? useState(true) : useState(false)
-
- 
-
    const toggleOverlay = () => {
      setVisible(!visible);
    };
 
-   const [filteredData, setFilteredData] = useState([])
+  const [filteredData, setFilteredData] = useState([])
     const [filtered, setFiltered] = useState(false)
     var data = []
-
-
-
     item.category != 'All Products' ? 
-        data = Products.filter(product => product.product_category === item.category)
-                
+        data = Products.filter(product => product.product_category === item.category)        
      : ( data = Products )
-
-
      let filteredProduct = []
 
      const filterFunction = ({item}) => {
@@ -104,6 +94,7 @@ return (
                 style={{backgroundColor: bedActive ? '#48CCCD' : 'white', borderRadius:5,paddingLeft:15,paddingRight:15, paddingBottom:2,paddingTop:2,marginBottom:15}} 
                 onPress = {
                     () => { navigation.navigate('ProductListingScreen',{item:{category:'bed'}}) ; setBedActive(true) ; setSofaActive(false) ; setChairActive(false) ; setTableActive(false) ; {toggleOverlay()}}    
+                
                 }
             >
                 <Text style={{color: bedActive ? 'white' : 'black',fontSize:20,textAlign:'center'}}>
