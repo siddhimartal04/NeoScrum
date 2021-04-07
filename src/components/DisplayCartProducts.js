@@ -4,7 +4,7 @@ import React from 'react'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { connect } from 'react-redux'
 
-import { handleRemoveFromCart } from '../redux/CartRedux/CartAction'
+import { handleRemoveFromCart,handleUpdateProductQuantity } from '../redux/CartRedux/CartAction'
 function DisplayCartProducts(props) {
     return (
 
@@ -33,11 +33,52 @@ function DisplayCartProducts(props) {
                                 Rs.{props.item.product_price}
                             </Text>                            
                         
+                            <View style={{flexDirection:'row',alignItems:'center',backgroundColor:'white'}}>
+                                
+                                
+                                <TouchableOpacity 
+                                style={{backgroundColor:'white',paddingLeft:5,marginRight:10,paddingRight:5}}
+                                onPress={
+                                    () => {
+                                        props.handleUpdateProductQuantity(props.item,props.quantity+1)
+                                    }
+                                }
+                                >
+                                    
+                                    <Text style={{fontSize:20,fontWeight:'bold'}}>
+                                        +
+                                    </Text>
+
+                                </TouchableOpacity>
+
+                                <View style={{backgroundColor:'dodgerblue',paddingLeft:7,paddingRight:7,borderRadius:20}}>
+                                    <Text style={{fontSize:20,color:'white'}}>{props.quantity}</Text>
+                                </View>
+
+                                <TouchableOpacity 
+                                style={{backgroundColor:'white',paddingLeft:6,marginLeft:10,paddingRight:6}}
+                                onPress={
+                                    () => {
+                                        props.quantity > 1 ?
+                                            props.handleUpdateProductQuantity(props.item,props.quantity-1)
+                                        : null
+                                    }
+                                }
+                                >
+                                    
+                                    <Text style={{fontSize:20,fontWeight:'bold'}}>
+                                        -
+                                    </Text>
+
+                                </TouchableOpacity>
+                            </View>                      
+                        
                         </View>
                     
                     </View>
                 
                 </View>
+                
                 
                 <TouchableOpacity  style={{position:'absolute',right:5,top:5}} onPress={() => props.handleRemoveFromCart(props.item)}>
                     <Icon 
@@ -53,7 +94,8 @@ function DisplayCartProducts(props) {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleRemoveFromCart : (item) => dispatch(handleRemoveFromCart(item))
+        handleRemoveFromCart : (item) => dispatch(handleRemoveFromCart(item)),
+        handleUpdateProductQuantity : (item,quantity) => dispatch(handleUpdateProductQuantity(item,quantity))
     }
 }
 const styles = StyleSheet.create({

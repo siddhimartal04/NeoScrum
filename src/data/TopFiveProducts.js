@@ -1,6 +1,7 @@
 export const TopFiveProducts = [
     {
-        id:1,
+       
+        id:9,
         product_name: "Adolph Bed With Side Storage",
         product_price: 47000,
         product_category: "bed",
@@ -13,7 +14,8 @@ export const TopFiveProducts = [
     },
 
     {
-        id:2,
+        
+        id:10,
         product_name: "Slater Study Table With Drawer",
         product_price: 17399,
         product_category: "table",
@@ -26,7 +28,8 @@ export const TopFiveProducts = [
     },
 
     {
-        id:3,
+        
+        id:11,
         product_name: "Bombay Leather Sofa set",
         product_price: 63900,
         product_category: "sofa",
@@ -39,7 +42,8 @@ export const TopFiveProducts = [
     },
 
     {
-        id:4,
+        
+        id:12,
         product_name: "Wooden Square Chair",
         product_price: 2000,
         product_category: "chair",

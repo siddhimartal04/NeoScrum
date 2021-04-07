@@ -1,7 +1,8 @@
 import {
     ADD_TO_CART,
     REMOVE_FROM_CART,
-    CLEAR_CART
+    CLEAR_CART,
+    UPDATE_PRODUCT_QUANTITY
 } from './CartActionType'
 
 const initialCartState = {
@@ -20,9 +21,15 @@ export const CartReducer = (state = initialCartState, action) => {
             case REMOVE_FROM_CART :
                 return {
                     ...state,
-                    cartItems: state.cartItems.filter(item => item !== action.payload)
+                    cartItems: state.cartItems.filter(item => item.product !== action.payload)
                 }
-                
+                case UPDATE_PRODUCT_QUANTITY : 
+
+                return {
+                    ...state,
+                    cartItems: state.cartItems.map(item => item.product.id === action.payload.product.id ? {...item, quantity: action.payload.quantity} : item)
+                }
+
         case CLEAR_CART : 
             return {
                 ...state,

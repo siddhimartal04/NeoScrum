@@ -50,7 +50,7 @@ const ProductDetail = (props) => {
     const handleStarPress = (rating) => {
         setStarCount(rating);
     }
-
+    var includesProduct = false
     return (
         <View style={globalStyles.container}>
             <ScrollView style={globalStyles.scrollView}>
@@ -88,9 +88,10 @@ const ProductDetail = (props) => {
                             style={styles.icon}
                             onPress={
                                 () => {
-                                    props.isLogin ? 
-                                        !props.cartItems.includes(item) 
-                                        ?
+                                    props.isLogin ? (        
+                                        props.cartItems.map(product => product.product.id === item.id ? includesProduct = true : null),
+                                        !includesProduct ?
+
                                         (
                                             props.handleAddToCart(item)
 
@@ -100,13 +101,17 @@ const ProductDetail = (props) => {
                                             text:'Product already added to cart',
             
                                         })
-                                    :
+            
+                                    
+                                        )
+                                                                :
                                     Toast.show({
                                         text:'Need to login first'
                                     })
             
-                                 }
+                                }
                             }
+                            color={'white'}
                         />
                         <Swiper 
                             style={{height: 240,}}
@@ -188,7 +193,6 @@ const ProductDetail = (props) => {
                                         <Icon name="whatsapp" size={25} style={{marginRight:10,color:'#34A34F'}} />
                                         <Text style={{fontSize:20}}>WhatsApp</Text>
                                     </View>
-
                                     <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}>
                                     <Icon name="facebook" size={25} style={{marginRight:10, color:'#3B5998'}}  />
                                         <Text style={{fontSize:20}}>  Facebook</Text>
@@ -201,7 +205,6 @@ const ProductDetail = (props) => {
                                     <Icon name="twitter" size={25} style={{marginRight:10, color:'#3B5998'}}  />
                                         <Text style={{fontSize:20}}>  Twitter</Text>
                                     </View>
-
                                     <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}>
                                         <Icon name="instagram" size={25} style={{marginRight:10,color:'purple'}}  />
                                         <Text style={{fontSize:20}}>Instagram</Text>

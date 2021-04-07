@@ -1,23 +1,16 @@
-import React ,{useEffect}from 'react';
-import { View, StyleSheet,Image ,Text,TouchableWithoutFeedback} from 'react-native';
-
+import React from 'react';
+import { View, StyleSheet,Image ,Text} from 'react-native';
 import {
     DrawerContentScrollView,
     DrawerItem
 } from '@react-navigation/drawer';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import HomeScreen from './HomeScreen'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { connect } from 'react-redux'
-
 import { handleLogout } from '../redux/userAction'
 
  function DrawerContent(props) {
 
-    
-
-   // const { signOut } = React.useContext(AuthContext);
 
     return(
         <View style={{flex:1}}>
@@ -48,7 +41,7 @@ import { handleLogout } from '../redux/userAction'
 
                     </View>
 
-                    {/* <Drawer.Section style={styles.drawerSection}> */}
+                   
                         <DrawerItem 
                             icon={({color, size}) => (
                                 <Icon 
@@ -125,7 +118,25 @@ import { handleLogout } from '../redux/userAction'
                             )}
                             label="All Products"
                             onPress={() => props.navigation.navigate('ProductListingScreen',{item:{category:'All Products'}})} />
-                        {
+
+                    {
+                        props.isLogin ? ( 
+                            <DrawerItem 
+                            icon={({color, size}) => (
+                                <Icon 
+                                name="user" 
+                                color={color}
+                                size={size}
+                                />
+                            )}
+                            label="My Account"
+                            onPress={() => props.navigation.navigate('My Account')} />
+                     
+                        ) : (
+                            null
+                         )
+                    }
+                                            {
                         props.isLogin ? ( 
                             <DrawerItem 
                             icon={({color, size}) => (
@@ -191,19 +202,7 @@ import { handleLogout } from '../redux/userAction'
 
                 </View>
             </DrawerContentScrollView>
-            {/* <Drawer.Section style={styles.bottomDrawerSection}>
-                <DrawerItem 
-                    icon={({color, size}) => (
-                        <Icon 
-                        name="exit-to-app" 
-                        color={color}
-                        size={size}
-                        />
-                    )}
-                    label="Sign Out"
-                    onPress={() => {signOut()}}
-                />
-            </Drawer.Section> */}
+
         </View>
     );
 }
