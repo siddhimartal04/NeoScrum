@@ -29,6 +29,10 @@ function ResetPasswordScreen({navigation}) {
 
     const [securePassword, setSecurePassword] = useState(true);
     const [eyeicon, setEyeIcon] = useState('eye-slash');
+    const [secureNPassword, setSecureNPassword] = useState(true);
+    const [secureCPassword, setSecureCPassword] = useState(true);
+    const [eyenicon, setNEyeIcon] = useState('eye-slash');
+    const [eyecicon, setCEyeIcon] = useState('eye-slash');
 
     const handleEyeClick = () => {
         setSecurePassword(!securePassword);
@@ -38,7 +42,22 @@ function ResetPasswordScreen({navigation}) {
           setEyeIcon('eye-slash');
         }
       };
-
+      const handleCEyeClick = () => {
+        setSecureCPassword(!secureCPassword);
+        if (eyecicon === 'eye-slash') {
+          setCEyeIcon('eye');
+        } else {
+          setCEyeIcon('eye-slash');
+        }
+      };
+      const handleNEyeClick = () => {
+        setSecureNPassword(!secureNPassword);
+        if (eyenicon === 'eye-slash') {
+          setNEyeIcon('eye');
+        } else {
+          setNEyeIcon('eye-slash');
+        }
+      };
 
 return (
     <Formik
@@ -107,9 +126,9 @@ return (
                                     onChangeText={handleChange('newpassword')}
                                     onBlur={handleBlur('newpassword')}
                                     value={values.newpassword}
-                                    secureTextEntry={securePassword}/>
+                                    secureTextEntry={secureNPassword}/>
                                             <Icon
-                            name={eyeicon}
+                            name={eyenicon}
                             color={'black'}
                             solid
                             size={18}
@@ -119,7 +138,7 @@ return (
                               paddingTop: 2,
                               opacity: 0.6,
                             }}
-                            onPress={() => handleEyeClick()}
+                            onPress={() => handleNEyeClick()}
                           />
                             </View>
                             {(errors.newpassword && touched.newpassword)  && <Text style={{ marginTop:5,color:'red',fontSize:18 }}>{errors.newpassword}</Text>}
@@ -138,9 +157,9 @@ return (
                                     onChangeText={handleChange('confirmpassword')}
                                     onBlur={handleBlur('confirmpassword')}
                                     value={values.confirmpassword}
-                                    secureTextEntry={securePassword}/>
+                                    secureTextEntry={secureCPassword}/>
                                             <Icon
-                            name={eyeicon}
+                            name={eyecicon}
                             color={'black'}
                             solid
                             size={18}
@@ -150,7 +169,7 @@ return (
                               paddingTop: 2,
                               opacity: 0.6,
                             }}
-                            onPress={() => handleEyeClick()}
+                            onPress={() => handleCEyeClick()}
                           />
                             </View>
                             {(errors.confirmpassword && touched.confirmpassword)  && <Text style={{ marginTop:5,color:'red',fontSize:18 }}>{errors.confirmpassword}</Text>}

@@ -63,7 +63,9 @@ const registerSchema = yup.object({
 function RegistrationScreen(props) {
   const navigation = useNavigation();
     const [securePassword, setSecurePassword] = useState(true);
+    const [secureCPassword, setSecureCPassword] = useState(true);
     const [eyeicon, setEyeIcon] = useState('eye-slash');
+    const [eyecicon, setCEyeIcon] = useState('eye-slash');
     // const [value, setValue] = useState('');
     // const [termsCondition , setTermsCondition] = useState(false)  
 
@@ -76,7 +78,14 @@ function RegistrationScreen(props) {
           setEyeIcon('eye-slash');
         }
       };
-
+      const handleCEyeClick = () => {
+        setSecureCPassword(!secureCPassword);
+        if (eyecicon === 'eye-slash') {
+          setCEyeIcon('eye');
+        } else {
+          setCEyeIcon('eye-slash');
+        }
+      };
       useEffect(()=>{
         if (props.isLogin)
         {
@@ -209,9 +218,9 @@ return (
                                     onChangeText={handleChange('confirmpassword')}
                                     onBlur={handleBlur('confirmpassword')}
                                     value={values.confirmpassword}
-                                    secureTextEntry={securePassword}/>
+                                    secureTextEntry={secureCPassword}/>
                                             <Icon
-                            name={eyeicon}
+                            name={eyecicon}
                             color={'black'}
                             solid
                             size={18}
@@ -221,7 +230,7 @@ return (
                               paddingTop: 2,
                               opacity: 0.6,
                             }}
-                            onPress={() => handleEyeClick()}
+                            onPress={() => handleCEyeClick()}
                           />
                             </View>
                             {(errors.confirmpassword && touched.confirmpassword)  && <Text style={{ marginTop:5,color:'red',fontSize:18 }}>{errors.confirmpassword}</Text>}

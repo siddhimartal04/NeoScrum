@@ -132,8 +132,24 @@ const ProductDetail = (props) => {
                         }
                         </Swiper>
                          </View>
+                         
                     
                 </View>
+                <View style={{marginTop:20,padding:10,borderColor:'lightgrey',marginBottom:20}}>
+                            
+                            <Text style={{fontSize:20}}>Product Details : </Text>
+                            <Text style={{fontSize:18,marginTop:6,color:'grey'}}>This product is made of high quality teak wood.</Text>
+                        
+                            <Text style={{marginTop:10,fontSize:20}}>Product Material: <Text style={{color:'grey'}}>Wood</Text> </Text>
+                            
+                            <Text style={{marginTop:6,fontSize:20}}>Dimension: <Text style={{color:'grey'}}>500*900</Text> </Text>
+                        
+                            
+                       
+                        
+                        </View>
+
+                
                 <View style={styles.buttonGroup}>
                         <View style={styles.buyNow}>
                             <TouchableOpacity >
@@ -293,7 +309,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         
-        marginTop:220
+        marginTop:10
     },
     buyNow: {
         flex: 1,

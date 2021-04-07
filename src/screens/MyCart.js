@@ -38,7 +38,7 @@ function MyCart(props) {
     <Text style={{fontSize:20}}>Rs.{props.cartItems.reduce(getTotalCost,0)}</Text>
 </View>
 
-<TouchableOpacity style={{flex:1,alignItems:'center',backgroundColor:'tomato',padding:10}}>
+<TouchableOpacity style={{flex:1,alignItems:'center',backgroundColor:'#48CCCD',padding:10}}>
         <Text style={{fontSize:20,color:'white'}}>
             Order Now
         </Text>
