@@ -3,8 +3,6 @@ import { View, Text,Button,ScrollView,StatusBar,TextInput ,StyleSheet,TouchableO
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Formik} from 'formik';
 import { useNavigation } from '@react-navigation/native'
-
-
 import * as yup from 'yup';
 import {globalStyles} from '../styles/globalStyles';
 import LinearGradient from 'react-native-linear-gradient';
@@ -12,7 +10,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux'
 
 import { handleUserLogin } from '../redux/userAction'
-import HomeScreen from './HomeScreen';
 
 const loginSchema = yup.object({
     email: yup.string().required('Please enter email').email('Enter valid email'),
@@ -38,6 +35,7 @@ function LoginScreen(props) {
           setEyeIcon('eye-slash');
         }
       };
+
   useEffect(()=>{
   if (props.isLogin)
   {

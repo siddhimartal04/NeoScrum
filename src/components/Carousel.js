@@ -26,7 +26,7 @@ const colors= [
         category:'table'
     },
   ]
-  function Carousel(props) {
+  function Carousel() {
     const navigation = useNavigation();
   
     return (

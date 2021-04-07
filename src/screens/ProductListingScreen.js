@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { View, Text,Button,ScrollView,StatusBar,FlatList,TextInput ,StyleSheet,TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useRoute } from '@react-navigation/native';
-import {globalStyles} from '../styles/globalStyles';
 import Card from '../components/Card';
 import {Products} from '../data/Products'
 import { Overlay } from 'react-native-elements';
@@ -14,7 +13,7 @@ let arr = []
 function ProductListingScreen(props) {
     const navigation = useNavigation()
     const route = useRoute();
-    const {item} = route.params
+    const {item} = route.params   //colors
    const [visible, setVisible] = useState(false);
    const [bedActive, setBedActive] = item.category === 'bed' ? useState(true) :  useState(false)
    const [sofaActive, setSofaActive] = item.category === 'sofa' ? useState(true) : useState(false)
@@ -25,14 +24,14 @@ function ProductListingScreen(props) {
    };
 
   const [filteredData, setFilteredData] = useState([])
-    const [filtered, setFiltered] = useState(false)
+    const [filtered, setFiltered] = useState(false) //initial value of filtered setfiltered will change it to true
     var data = []
-    item.category != 'All Products' ? 
+    item.category != 'All Products' ?    //drawer and carousel
         data = Products.filter(product => product.product_category === item.category)        
      : ( data = Products )
      let filteredProduct = []
 
-     const filterFunction = ({item}) => {
+     const filterFunction = ({item}) => {   //filter
          item.category.map(category => {
              const array = Products.filter(product => {product.product_category === category ? filteredProduct.push(product) : null} )
              setFilteredData(filteredProduct)
