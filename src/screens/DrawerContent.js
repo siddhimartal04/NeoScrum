@@ -47,7 +47,7 @@ import { handleLogout } from '../redux/userAction'
                                 <Icon 
                                 name="home" 
                                 color={color}
-                                size={size}
+                                size={25}
                                 />
                             )}
                             label="Home"
@@ -60,23 +60,25 @@ import { handleLogout } from '../redux/userAction'
                                 <Icon 
                                 name="user" 
                                 color={color}
-                                size={size}
+                                size={25}
                                 />
                             )}
-                            label="Login"
+                            label="  Login"
                             onPress={() => {props.navigation.navigate('Login')}}
                         />):(null)}
+                        {
+                        !props.isLogin ? (
                                                 <DrawerItem 
                             icon={({color, size}) => (
                                 <Icon 
                                 name="user" 
                                 color={color}
-                                size={size}
+                                size={25}
                                 />
                             )}
-                            label="Registration"
+                            label=" Registration"
                             onPress={() => {props.navigation.navigate('Registration')}}
-                        />
+                        />):(null)}
                                             {
                         props.isLogin ? ( 
                             <DrawerItem 
@@ -84,11 +86,11 @@ import { handleLogout } from '../redux/userAction'
                                 <Icon 
                                 name="user" 
                                 color={color}
-                                size={size}
+                                size={25}
                                 />
                             )}
-                            label="My Cart"
-                            onPress={() => {props.navigation.navigate('MyCart')}}
+                            label=" My Cart"
+                            onPress={() => {props.navigation.navigate('My Cart')}}
                         />
                             
                            
@@ -96,24 +98,24 @@ import { handleLogout } from '../redux/userAction'
                             null
                          )
                     }
-                        <DrawerItem 
+                        {/* <DrawerItem 
                             icon={({color, size}) => (
                                 <Icon 
-                                name="map" 
+                                name="map-pin" 
                                 color={color}
-                                size={size}
+                                size={25}
                                 />
                             )}
-                            label="Add Address"
+                            label="  Add Address"
                             onPress={() => {props.navigation.navigate('AddAddress')}}
                         
-                               />
+                               /> */}
                       <DrawerItem 
                             icon={({color, size}) => (
                                 <Icon 
                                 name="shopping-bag" 
                                 color={color}
-                                size={size}
+                                size={22}
                                 />
                             )}
                             label="All Products"
@@ -126,10 +128,10 @@ import { handleLogout } from '../redux/userAction'
                                 <Icon 
                                 name="user" 
                                 color={color}
-                                size={size}
+                                size={25}
                                 />
                             )}
-                            label="My Account"
+                            label=" My Account"
                             onPress={() => props.navigation.navigate('My Account')} />
                      
                         ) : (
@@ -143,7 +145,7 @@ import { handleLogout } from '../redux/userAction'
                                 <Icon 
                                 name="sign-out" 
                                 color={color}
-                                size={size}
+                                size={25}
                                 />
                             )}
                             label="Sign out"

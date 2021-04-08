@@ -90,7 +90,7 @@ function HomeStackScreen (props)  {
             </View>
                 )
             }}/>
-          <HomeStack.Screen name="MyCart" component={MyCart}/> 
+          <HomeStack.Screen name="My Cart" component={MyCart}/> 
 
       
     </HomeStack.Navigator>

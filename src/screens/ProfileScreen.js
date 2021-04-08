@@ -36,11 +36,11 @@ const ProfileScreen = ({navigation}) => {
       <View style={styles.userInfoSection}>
         <View style={styles.row}>
           <Icon name="map-pin" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>Maharashtra, India</Text>
+          <Text style={{color:"#777777", marginLeft: 28}}>Maharashtra, India</Text>
         </View>
         <View style={styles.row}>
           <Icon name="phone" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>91-900000009</Text>
+          <Text style={{color:"#777777", marginLeft: 25}}>91-900000009</Text>
         </View>
         <View style={styles.row}>
           <Icon name="envelope" color="#777777" size={20}/>
@@ -68,15 +68,35 @@ const ProfileScreen = ({navigation}) => {
                           }}>
           <View style={styles.menuItem}>
             <Icon name="lock" color="#48CCCD" size={25}/>
-            <Text style={styles.menuItemText}>Reset Password</Text>
+            <Text style={{ color: '#777777',
+    marginLeft: 28,
+    fontWeight: '600',
+    fontSize: 16,
+    lineHeight: 26,}}>Reset Password</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple  onPress={() => {
-                            navigation.navigate('AddAddress');
+                            navigation.navigate('AddressList');
                           }}>
           <View style={styles.menuItem}>
             <Icon name="map-marker" color="#48CCCD" size={25}/>
-            <Text style={styles.menuItemText}>Add Address</Text>
+            <Text style={{ color: '#777777',
+    marginLeft: 30,
+    fontWeight: '600',
+    fontSize: 16,
+    lineHeight: 26,}}>Shipping Address</Text>
+          </View>
+        </TouchableRipple>
+        <TouchableRipple  onPress={() => {
+                            navigation.navigate('Order List');
+                          }}>
+          <View style={styles.menuItem}>
+            <Icon name="shopping-bag" color="#48CCCD" size={20}/>
+            <Text style={{ color: '#777777',
+    marginLeft: 27,
+    fontWeight: '600',
+    fontSize: 16,
+    lineHeight: 26,}}>My Orders</Text>
           </View>
         </TouchableRipple>
         
@@ -84,7 +104,7 @@ const ProfileScreen = ({navigation}) => {
                             navigation.navigate('MyCart');
                           }}>
           <View style={styles.menuItem}>
-            <Icon name="shopping-cart" color="#48CCCD" size={25}/>
+            <Icon name="shopping-cart" color="#48CCCD" size={23}/>
             <Text style={styles.menuItemText}>My Cart</Text>
           </View>
         </TouchableRipple>
@@ -106,6 +126,7 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:'white'
   },
   userInfoSection: {
     paddingHorizontal: 30,
@@ -147,7 +168,7 @@ const styles = StyleSheet.create({
   },
   menuItemText: {
     color: '#777777',
-    marginLeft: 20,
+    marginLeft: 25,
     fontWeight: '600',
     fontSize: 16,
     lineHeight: 26,

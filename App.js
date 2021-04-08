@@ -42,6 +42,7 @@ function App(props) {
             >
               <Drawer.Screen name="Home" component={HomeStack} />
               <Drawer.Screen name='Login' component={LoginStack} />
+              
               <Drawer.Screen name="Registration" component={RegistrationStack} />
               <Drawer.Screen name="AddAddress" component={AddAddressScreen} />   
               <Drawer.Screen name="My Account" component={ProfileStack} />     

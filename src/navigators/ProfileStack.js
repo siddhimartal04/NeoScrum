@@ -6,10 +6,12 @@ import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import SetPasswordScreen from '../screens/SetPasswordScreen';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import RegistrationScreen from '../screens/RegistrationScreen';
-
-import Icon from 'react-native-vector-icons/FontAwesome';
 import AddAddressScreen from '../screens/AddAddress';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import AddressList from '../screens/AddressList';
 import MyCart from '../screens/MyCart';
+import OrderList from '../screens/OrderList';
+import OrderId from '../screens/OrderId';
 const ProfileStack = createStackNavigator();
 
 const ProfileStackScreen = ({navigation}) => (
@@ -30,10 +32,13 @@ const ProfileStackScreen = ({navigation}) => (
             )
             }}/>
          <ProfileStack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen}/>
+         <ProfileStack.Screen name="AddressList" component={AddressList}/>
          <ProfileStack.Screen name="AddAddress" component={AddAddressScreen}/>
+         <ProfileStack.Screen name="Order List" component={OrderList}/>
          <ProfileStack.Screen name="MyCart" component={MyCart}/>
           <ProfileStack.Screen name="SetPasswordScreen" component={SetPasswordScreen}/>
           <ProfileStack.Screen name="EditProfile" component={EditProfileScreen}/>
+          <ProfileStack.Screen name="Order Id" component={OrderId}/>
         {/* <LoginStack.Screen name="RegistrationScreen" component={RegistrationScreen}/>
        */}
     </ProfileStack.Navigator>
