@@ -12,14 +12,15 @@ function Card({item}) {
   
             <TouchableWithoutFeedback key={item.id} onPress={() => navigation.navigate('ProductDetails',{item})}
 >
-                <View style={styles.container}>
+                <View style={styles.container}>  
+                
                   
                     <Image 
                     source={item.product_images}
                     style={styles.imageStyles}
                     />
                     <View style={styles.productTextStyle}>
-                      <View style={{flex:1,maxWidth:'75%'}}>
+                      <View style={{flex:1,maxWidth:'75%',marginLeft:11}}>
                             
                                 <Text style={styles.productNameStyles}>
                                     {item.product_name}
@@ -71,8 +72,8 @@ const styles = StyleSheet.create({
   flexDirection:'row',
   alignItems:'center',
   borderColor:'grey',
-  marginLeft:10,
-  marginRight:10,
+  marginLeft:15,
+  marginRight:15,
   backgroundColor: 'white',
   shadowColor:'#000',
   justifyContent:'space-between',
