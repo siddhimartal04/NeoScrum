@@ -21,6 +21,12 @@ const loginSchema = yup.object({
       .matches(/^[a-zA-Z0-9_]*$/, 'Must Be Alphanumeric'),
   });
 
+/**
+ * @author Siddhi Martal
+ * @param {navigation} props  navigation is a object which is use to navigate between different screens.
+ * @description login screen is use to take inputs to perform login into application for registered users.
+ * @return jsx which is used to display content to perform authentication.
+ */
 function LoginScreen(props) {
  
   const navigation = useNavigation();

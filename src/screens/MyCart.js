@@ -2,10 +2,17 @@ import { View, Text, FlatList,StyleSheet,TouchableOpacity } from 'react-native'
 import React from 'react'
 
 import { connect } from 'react-redux'
-
+import { useNavigation } from '@react-navigation/native'
 import DisplayCartProducts from '../components/DisplayCartProducts'
+/**
+ * @author Siddhi Martal
+ * @param {object} props is a object contains redux state and some actions to perform changes in redux state.
+ * @description This screen contains user cart items along with some buttons to perform action on user cart such as increment & decrement product quantity, delete product from cart, buy all product of cart.
+ * @returns jsx which contain cards to show the cart item.
+ */
 
 function MyCart(props) {
+    const  navigation  = useNavigation();
     const getTotalCost = (sum , product) => sum + product.product.product_price * product.quantity
 
     return (
@@ -38,7 +45,7 @@ function MyCart(props) {
     <Text style={{fontSize:20}}>Rs.{props.cartItems.reduce(getTotalCost,0)}</Text>
 </View>
 
-<TouchableOpacity style={{flex:1,alignItems:'center',backgroundColor:'#48CCCD',padding:10}}>
+<TouchableOpacity style={{flex:1,alignItems:'center',backgroundColor:'#48CCCD',padding:10}} onPress={() => navigation.navigate('Order Summary',{products: props.cartItems})}>
         <Text style={{fontSize:20,color:'white'}}>
             Order Now
         </Text>

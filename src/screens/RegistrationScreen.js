@@ -59,7 +59,12 @@ const registerSchema = yup.object({
   //   {label: 'Male', value: 0},
     
   // ];
-
+/**
+ * @author Siddhi Martal
+ * @param {navigation}:navigation is a object which is use to navigate between different screens.
+ * @description registration screen is use to take input from user to make him/her a new user of application.
+ * @return jsx which is used to display content which helps to register as a user of application.
+ */
 function RegistrationScreen(props) {
   const navigation = useNavigation();
     const [securePassword, setSecurePassword] = useState(true);

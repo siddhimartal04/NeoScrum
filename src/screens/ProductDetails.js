@@ -22,9 +22,10 @@ import Share from 'react-native-share';
 import { handleAddToCart } from '../redux/CartRedux/CartAction'
 import { Toast } from 'native-base';
 import { connect } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
 const ProductDetail = (props) => {
 
-
+    const navigation = useNavigation();
     const MyCustomShare =async() => {
         const shareOptions ={
             message:'this is msg',
@@ -46,6 +47,7 @@ const ProductDetail = (props) => {
     const route = useRoute();
 
     const {item} = route.params
+    const [quantity, setQuantity] = useState(1)
     const [starCount, setStarCount] = useState(1);
     const handleStarPress = (rating) => {
         setStarCount(rating);
@@ -152,7 +154,7 @@ const ProductDetail = (props) => {
                 
                 <View style={styles.buttonGroup}>
                         <View style={styles.buyNow}>
-                            <TouchableOpacity >
+                            <TouchableOpacity   onPress={()=> navigation.navigate('Order Summary',{ products:[{product:item,quantity:quantity}] } )}  >
                                 <Text style={styles.buttonTitle}>BUY NOW</Text>
                             </TouchableOpacity>
                         </View>

@@ -8,9 +8,16 @@ import ProductDetails from '../screens/ProductDetails';
 import { View ,Text} from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import { connect } from 'react-redux'
+import OrderSummary from '../screens/OrderSummary';
 const HomeStack = createStackNavigator();
 
 
+/**
+ * @author Siddhi Martal
+ * @param {object} props  navigation object used to navigate between different screen
+ * @description this function contains navigations screens of home stack.
+ * @returns jsx
+ */
 function HomeStackScreen (props)  {
     const  navigation  = useNavigation();
     return(
@@ -39,7 +46,7 @@ function HomeStackScreen (props)  {
                 style={{
                 marginRight: 30,
                 }}
-                onPress={() => navigation.navigate('MyCart')}
+                onPress={() => navigation.navigate('My Cart')}
                 />
                 <View style={{position:'absolute',top:-7,right:7,backgroundColor:'red',paddingLeft:5,paddingRight:5,borderRadius:50}}>
                 <Text style={{color:'white'}}>{props.cartItems.length}</Text>
@@ -61,7 +68,7 @@ function HomeStackScreen (props)  {
                 style={{
                 marginRight: 30,
                 }}
-                onPress={() => navigation.navigate('MyCart')}
+                onPress={() => navigation.navigate('My Cart')}
                 />
                 <View style={{position:'absolute',top:-7,right:7,backgroundColor:'red',paddingLeft:5,paddingRight:5,borderRadius:50}}>
                 <Text style={{color:'white'}}>{props.cartItems.length}</Text>
@@ -82,7 +89,7 @@ function HomeStackScreen (props)  {
                 style={{
                 marginRight: 30,
                 }}
-                onPress={() => navigation.navigate('MyCart')}
+                onPress={() => navigation.navigate('My Cart')}
                 />
                 <View style={{position:'absolute',top:-7,right:7,backgroundColor:'red',paddingLeft:5,paddingRight:5,borderRadius:50}}>
                 <Text style={{color:'white'}}>{props.cartItems.length}</Text>
@@ -91,7 +98,7 @@ function HomeStackScreen (props)  {
                 )
             }}/>
           <HomeStack.Screen name="My Cart" component={MyCart}/> 
-
+          <HomeStack.Screen name="Order Summary" component={OrderSummary}/> 
       
     </HomeStack.Navigator>
     )

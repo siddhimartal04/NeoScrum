@@ -13,7 +13,12 @@ import MyCart from '../screens/MyCart';
 import OrderList from '../screens/OrderList';
 import OrderId from '../screens/OrderId';
 const ProfileStack = createStackNavigator();
-
+/**
+ * @author Siddhi Martal
+ * @param {object} props contains navigation object is used to navigate between different available screen.
+ * @description This function is used to create stack and different screens so that we can place that one over the other which is use while navigation.
+ * @returns jsx which contains Stack Navigation of Home screen.
+ */
 const ProfileStackScreen = ({navigation}) => (
     <ProfileStack.Navigator initialRouteName="ProfileScreen" >
         <ProfileStack.Screen name="Profile" component={ProfileScreen}

@@ -8,7 +8,12 @@ import RegistrationScreen from '../screens/RegistrationScreen';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 const LoginStack = createStackNavigator();
-
+/**
+ * @author Siddhi Martal
+ * @param {object} props contains navigation object is used to navigate between different available screen.
+ * @description This function is used to create stack and different screens so that we can place that one over the other which is use while navigation.
+ * @returns jsx which contains Stack Navigation Of login Screen
+ */
 const LoginStackScreen = ({navigation}) => (
     <LoginStack.Navigator initialRouteName="LoginScreen" >
         <LoginStack.Screen name="LoginScreen" component={LoginScreen}

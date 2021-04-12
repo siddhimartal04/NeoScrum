@@ -19,7 +19,12 @@ const setSchema = yup.object({
       .oneOf([yup.ref('password')], 'Must be same as password'),
 
   });
-
+/**
+ * @author Siddhi Martal
+ * @param {props}: props is a object which contains navigation as a property in it. navigation is a object which is use to navigate between different screens
+ * @description setPassword screen which contains three input field which is opt that user received on registered email, newPassword and confirm password to set new password.
+ * @return jsx which is used to display content to recover user account.
+ */
 function SetPasswordScreen({navigation}) {
 
     const [securePassword, setSecurePassword] = useState(true);

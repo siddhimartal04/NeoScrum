@@ -8,7 +8,12 @@ import LinearGradient from 'react-native-linear-gradient';
 const forgotSchema = yup.object({
     email: yup.string().required('Please enter email').email('Enter valid email')
   });
-
+/**
+ * @author Siddhi Martal
+ * @param {object} props contains navigation object which is use to navigate between different screens
+ * @description forgotPassword screen is used if user of a application forgot his/her password, Using this screen user can enter  registered email so that app can send verification code to change password.
+ * @return jsx which is used to get registered email as a input from user.
+ */
 function ForgotPasswordScreen({navigation}) {
 
 
