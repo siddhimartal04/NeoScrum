@@ -1,5 +1,8 @@
 
-import { LOGIN_ACTION, REGISTER_ACTION, LOGOUT_ACTION ,RETRIEVE_TOKEN} from './types'
+import { LOGIN_ACTION, REGISTER_ACTION, LOGOUT_ACTION ,ADD_ADDRESS,
+    REMOVE_ADDRESS,
+    SAVE_ADDRESS,
+    SET_USER_PROFILE} from './types'
 
 const UserLogin = (loginDetails) => {
     return {
@@ -22,7 +25,33 @@ const UserLogout = () => {
         type : LOGOUT_ACTION
     }
 }
+const AddAddress = (addressDetails) => {
+    return {
+        type: ADD_ADDRESS,
+        payload: addressDetails
+    }
+}
 
+const RemoveAddress = (addressDetails) => {
+    return {
+        type: REMOVE_ADDRESS,
+        payload: addressDetails
+    }
+}
+
+const SaveAddress = (addressDetails) => {
+    return {
+        type: SAVE_ADDRESS,
+        payload: addressDetails
+    }
+}
+
+const SetUserProfile = (photo) => {
+    return {
+        type: SET_USER_PROFILE,
+        payload: photo
+    }
+}
 
 export const  handleUserLogin = (data) => {
     return (dispatch) => {
@@ -52,5 +81,37 @@ export const  handleUserRegistration = (data) => {
 export const handleLogout = () => {
     return (dispatch) => {
         dispatch(UserLogout())
+    }
+}
+export const handleAddAddress = (data) => {
+    return (dispatch) => {
+        const addressDetails = {
+            address: data.address,
+            landmark: data.landmark,
+            city: data.city,
+            pinCode: data.pinCode,
+            state: data.state,
+            country: data.country
+        }
+        dispatch(AddAddress(addressDetails))
+        console.log(addressDetails);
+    }
+}
+
+export const handleRemoveAddress = (addressDetails) => {
+    return (dispatch) => {
+        dispatch(RemoveAddress(addressDetails))
+    }
+}
+
+export const handleSaveAddress = (addressDetails) => {
+    return (dispatch) => {
+        dispatch(SaveAddress(addressDetails))
+    }
+}
+
+export const handleSetUserProfile = (photo) => {
+    return (dispatch) => {
+        dispatch(SetUserProfile(photo))
     }
 }

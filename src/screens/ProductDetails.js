@@ -23,6 +23,12 @@ import { handleAddToCart } from '../redux/CartRedux/CartAction'
 import { Toast } from 'native-base';
 import { connect } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
+/**
+ * @author Siddhi martal
+ * @param {*} props 
+ * @description This screen shows the details of the selected product along with price, description, material and buttons to share the product, add it to the cart, rate the product
+ * @returns JSX with carousel and buttons to share and add rating
+ */
 const ProductDetail = (props) => {
 
     const navigation = useNavigation();
@@ -95,7 +101,7 @@ const ProductDetail = (props) => {
                                         !includesProduct ?
 
                                         (
-                                            props.handleAddToCart(item)
+                                            props.handleAddToCart(item,quantity)
 
                                         )
                                         : 
@@ -137,6 +143,25 @@ const ProductDetail = (props) => {
                          
                     
                 </View>
+                <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center',borderTopColor:'lightgrey',borderTopWidth:1,paddingTop:10}}>
+                            
+                            <Text style={{fontSize:20,marginRight:15}}>QTY</Text>
+                            
+                            <TouchableOpacity onPress={() => setQuantity(prevVal => prevVal + 1)}>
+                                <Text style={{fontSize:19,color:'black'}}>+</Text>
+                            </TouchableOpacity>
+                            
+                            <View style={{borderRadius:50,backgroundColor:'dodgerblue',marginRight:10,marginLeft:10}}>
+                                <Text style={{color:'white',fontSize:20,paddingLeft:8,paddingRight:8}}>{quantity}</Text>
+                            </View>
+                            <TouchableOpacity 
+                            onPress={() =>
+                                    quantity > 1 ? setQuantity(prevVal => prevVal - 1) : null
+                                } >
+                                <Text style={{color:'black',fontSize:19,fontWeight:'bold'}}>-</Text>
+                            </TouchableOpacity>
+
+                        </View>
                 <View style={{marginTop:20,padding:10,borderColor:'lightgrey',marginBottom:20}}>
                             
                             <Text style={{fontSize:20}}>Product Details : </Text>
@@ -349,7 +374,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleAddToCart : (item) => dispatch(handleAddToCart(item))
+        handleAddToCart : (item,quantity) => dispatch(handleAddToCart(item,quantity))
     }
 }
 export default connect(mapStateToProps , mapDispatchToProps)(ProductDetail)

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Platform }
 
 
 import{ useNavigation , useRoute} from '@react-navigation/native'
-
+import { connect } from 'react-redux'
 function OrderSummary(props) {
 
     const navigation = useNavigation();
@@ -19,22 +19,31 @@ function OrderSummary(props) {
           
 
             <ScrollView contentContainerStyle={{flexGrow:1,backgroundColor:'white'}} >
-
+            {
+                    props.userAddress.address ? (
                 <View style={styles.addressStyle}>
 
                     <View>
                         <Text style={{fontSize:22}}>Siddhi Martal</Text>
-                        <Text style={{fontSize:18,marginTop:10}}>NeoSoft Technologies</Text>
-                        <Text style={{fontSize:18}}>Mumbai-400025, Maharashtra, India</Text>
+                        <Text style={{fontSize:18,marginTop:10}}>{props.userAddress.address}</Text>
+                        <Text style={{fontSize:18}}>{props.userAddress.city}-{props.userAddress.pinCode}, {props.userAddress.state}, {props.userAddress.country}</Text>
                         <Text style={{fontSize:18,color:'grey'}}>Mobile No.: 9869677118</Text>
                     </View>
 
                     <View>
-                        <TouchableOpacity style={styles.addressBtnStyle} onPress={() => navigation.navigate('Add Address')} >
+                        <TouchableOpacity style={styles.addressBtnStyle} onPress={() => navigation.navigate('Address List')} >
                             <Text style={{fontSize:20,color:'white',alignSelf:'center'}}>Change/Add Address</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
+                    ):(
+                        <View>
+                        <TouchableOpacity style={{backgroundColor:'#48CCCD',margin:10,padding:10,borderRadius:10}} onPress={() => navigation.navigate('Address List')} >
+                            <Text style={{fontSize:18,textAlign:'center',color:'white'}}>Select Shipping Address</Text>
+                        </TouchableOpacity>
+                    </View>
+            )
+        }
 
 
                 <View>
@@ -99,7 +108,11 @@ function OrderSummary(props) {
         </>
     )
 }
-
+const mapStateToProps = (state) => {
+    return {
+        userAddress: state.AuthUser.userAddress
+    }
+}
 const styles = StyleSheet.create({
     addressStyle : {
         margin:10,
@@ -146,4 +159,8 @@ const styles = StyleSheet.create({
         elevation: 7,
     }
 })
-export default OrderSummary
+
+
+export default connect(mapStateToProps,null)(OrderSummary)
+
+

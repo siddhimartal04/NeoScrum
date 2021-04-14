@@ -103,7 +103,7 @@ return (
         initialValues={{fname:'',lname:'',email: '', password: '',confirmpassword:'',phoneno:'',gender:''}}
         validationSchema={registerSchema}
         onSubmit={(values) => {
-          console.log('test')
+         
           props.handleUserRegistration(values);
          
         }}>

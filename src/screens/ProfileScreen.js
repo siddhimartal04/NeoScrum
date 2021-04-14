@@ -8,21 +8,31 @@ import {
   TouchableRipple,
 } from 'react-native-paper';
 
-
+import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-const ProfileScreen = ({navigation}) => {
-
+import { connect } from 'react-redux'
+const ProfileScreen = (props) => {
+  const navigation = useNavigation()
   return (
     <SafeAreaView style={styles.container}>
 
       <View style={styles.userInfoSection}>
         <View style={{flexDirection: 'row', marginTop: 15}}>
+        {
+                            props.userProfileImage ? (
+                                <Image 
+                                    source={{uri:props.userProfileImage}}
+                                    style={{width:90,height:90, borderRadius:100,
+                                      }}
+                                />
+                            ) : (
         <Image
                                 source={require('../assets/profilePic.jpeg')}
                                 style={{width:90,height:90}}
                                 
                             />
+                            )
+}
           <View style={{marginLeft: 20}}>
             <Text style={[styles.title, {
               marginTop:25,
@@ -121,8 +131,6 @@ const ProfileScreen = ({navigation}) => {
   );
 };
 
-export default ProfileScreen;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -174,3 +182,12 @@ const styles = StyleSheet.create({
     lineHeight: 26,
   },
 });
+const mapStateToProps = (state) => {
+  return {
+      userProfileImage : state.AuthUser.userProfileImage
+  }
+} 
+
+
+export default connect(mapStateToProps,null)(ProfileScreen)
+

@@ -7,6 +7,7 @@ import {Products} from '../data/Products'
 import { Overlay } from 'react-native-elements';
 
 
+import { Toast } from 'native-base'
 import { useNavigation } from '@react-navigation/native'
 
 let arr = []
@@ -27,7 +28,12 @@ function ProductListingScreen(props) {
    const [ratingVisible, setRatingVisible] = useState(false);
    
    const [priceVisible, setPriceVisible] = useState(false);
-
+   const [filterlist, setFliterlist] = useState({
+    category: '',
+    color: '',
+    rating: '',
+    price: ''
+})
    const toggleCategoryOverlay = () => {
      setCategoryVisible(!categoryVisible);
    };
@@ -62,6 +68,14 @@ function ProductListingScreen(props) {
 
      }
  
+     const colorFilter = (color) => {
+        data = filteredData.filter(product => product.product_color === color );
+        if (data.length > 0)
+            setFilteredData(data)
+        else Toast.show({
+            text:"No Products Available of that Color"
+        })
+    }
 
 return (
     
@@ -198,9 +212,49 @@ return (
                     
                 </Overlay>
 
-
-
                 <Overlay isVisible={colorVisible} onBackdropPress={toggleColorOverlay}>
+                    <View style={{padding:25,alignItems:'center',width:250}}>
+                        
+                        <Text style={{fontSize:25,textAlign:'center'}}>Select Color</Text>
+                        <View style={{borderBottomWidth:2, borderBottomColor:'dodgerblue',width:'100%'}}>
+                            <Text> </Text>
+                        </View>
+
+                        <View style={{marginTop:20,marginBottom:5,justifyContent:'center'}}>
+                            <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}} 
+                                //onPress = {() => {setFliterlist({...filterlist, color:'brown'}); allFilter()}}
+                                onPress = { () => {colorFilter('brown');toggleColorOverlay()} }
+                            >
+                                <View style={{backgroundColor:'brown',height:15,width:15}}></View>
+                                <Text style={{fontSize:20,marginLeft:10}}>Brown</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={{flexDirection:'row',alignItems:'center',marginTop:10}} 
+                                onPress = { () => {colorFilter('black');toggleColorOverlay()} }
+                            >
+                                <View style={{backgroundColor:'black',height:15,width:15}}></View>
+                                <Text style={{fontSize:20,marginLeft:10}}>Black</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={{flexDirection:'row',alignItems:'center',marginTop:10}} 
+                                onPress = { () => {colorFilter('grey');toggleColorOverlay()} }
+                            >
+                                <View style={{backgroundColor:'grey',height:15,width:15}}></View>
+                                <Text style={{fontSize:20,marginLeft:10}}>Gery</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={{flexDirection:'row',alignItems:'center',marginTop:10}}
+                                onPress = { () => {colorFilter('red');toggleColorOverlay()} }
+                            >
+                                <View style={{backgroundColor:'red',height:15,width:15}}></View>
+                                <Text style={{fontSize:20,marginLeft:10}}>Red</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </Overlay>
+
+
+                {/* <Overlay isVisible={colorVisible} onBackdropPress={toggleColorOverlay}>
                     <View style={{padding:25,alignItems:'center',width:250}}>
                         
                         <Text style={{fontSize:25,textAlign:'center'}}>Select Color</Text>
@@ -212,7 +266,7 @@ return (
 
                         </View>
                     </View>
-                </Overlay>
+                </Overlay> */}
 
                 <Overlay isVisible={ratingVisible} onBackdropPress={toggleRatingOverlay}>
                     <View style={{padding:25,alignItems:'center',width:250}}>

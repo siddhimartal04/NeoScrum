@@ -9,7 +9,7 @@ import CheckBox from 'react-native-check-box';
 import LinearGradient from 'react-native-linear-gradient';
 import {globalStyles} from '../styles/globalStyles';
 import { useNavigation } from '@react-navigation/native'
-import { handleUserRegistration } from '../redux/userAction'
+import { handleSetUserProfile } from '../redux/userAction'
 import {connect} from 'react-redux'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as ImagePicker from 'react-native-image-picker'
@@ -75,6 +75,7 @@ function EditProfileScreen(props) {
           console.log(response.uri);
           if(response.uri) {
               setPhoto(response.uri)
+              props.handleSetUserProfile(response.uri)
           }
       });
   }
@@ -111,11 +112,9 @@ return (
                     <View style={{margin:30, flex:1}}>
                     <TouchableOpacity onPress={() => {}}>
                         <View style={styles.imageContainer}>
-                            {
-                                photo
-                                    ?
+                        { props.userProfileImage ?
                                         <ImageBackground 
-                                            source={{uri: photo}}
+                                            source={{uri: props.userProfileImage}}
                                             style={{height: 100, width: 100}}
                                             imageStyle={{borderRadius: 100,}}
                                         >
@@ -272,7 +271,17 @@ return (
   );
 }
 
+const mapStateToProps = (state) => {
+    return {
+        userProfileImage: state.AuthUser.userProfileImage
+    }
+}
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleSetUserProfile: (photo) => dispatch(handleSetUserProfile(photo))
+    }
+}
 
 const styles = StyleSheet.create({
     action: {
@@ -339,4 +348,4 @@ camIcon: {
 
 
 
-export default EditProfileScreen
+export default connect(mapStateToProps,mapDispatchToProps)(EditProfileScreen)

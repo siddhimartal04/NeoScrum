@@ -5,6 +5,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Carousel from '../components/Carousel';
 import Card from '../components/Card';
 import {TopFiveProducts} from '../data/TopFiveProducts'
+/**
+ * @author Siddhi Martal
+ * @param 
+ * @description This is the homescreen that displays a carousel for categories of products available and top products from each category for the week
+ * @returns JSX with a carousel and a list of top products from each category
+ */
 
 function HomeScreen(props) {
   const navigation = useNavigation();

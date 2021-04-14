@@ -6,9 +6,11 @@ import * as yup from 'yup';
 import {globalStyles} from '../styles/globalStyles';
 import LinearGradient from 'react-native-linear-gradient';
 
+import { connect } from 'react-redux'
+import { handleAddAddress } from '../redux/userAction'
 const addressSchema = yup.object({
     address: yup.string().required(),
-    pincode: yup
+    pinCode: yup
       .string()
       .required()
       .min(6)
@@ -34,18 +36,23 @@ const addressSchema = yup.object({
  * @description this screen contains different input fields where user can edit the address.
  * @returns jsx which contains input fields and button to perform changes in database.
  */
-function AddAddressScreen({navigation}) {
+function AddAddressScreen(props) {
 
   
 
 return (
     <Formik
         initialValues={{   address: '',
-        pincode: '',
+        pinCode: '',
         city: '',
         state: '',
         country: '',landmark:''}}
-        validationSchema={addressSchema}>
+        validationSchema={addressSchema}
+        onSubmit={(values) => {
+        
+            props.handleAddAddress(values);
+           
+          }}>
     {({
      handleChange,
      handleBlur,
@@ -149,13 +156,13 @@ return (
                                 <TextInput
                                     style={globalStyles.textInput}
                                     placeholder="Enter pin code"
-                                    onChangeText={handleChange('pincode')}
-                                    onBlur={handleBlur('pincode')}
+                                    onChangeText={handleChange('pinCode')}
+                                    onBlur={handleBlur('pinCode')}
                                     value={values.pincode}
                                     />
                                             
                             </View>
-                            {(errors.pincode && touched.pincode)  && <Text style={{ marginTop:5,color:'red',fontSize:18 }}>{errors.pincode}</Text>}
+                            {(errors.pinCode && touched.pinCode)  && <Text style={{ marginTop:5,color:'red',fontSize:18 }}>{errors.pinCode}</Text>}
                             <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
                                 <Text style={{fontSize:20, marginTop:25,color:'black'}}>Country</Text>
                             </View>
@@ -177,7 +184,7 @@ return (
                            
                             <LinearGradient colors={[ '#48CCCD','#a1c4fd']} style={globalStyles.submitButton}>
                             <TouchableOpacity 
-                                onPress={()=>handleSubmit()}  disabled={!isValid}
+                                onPress={handleSubmit}  disabled={!isValid}
                             >
                                 <Text style={{fontSize:20, color:'white'}}>
                                     Submit
@@ -196,5 +203,12 @@ return (
   );
 }
 
-export default AddAddressScreen;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleAddAddress : (addressDetails) => dispatch(handleAddAddress(addressDetails))
+    }
+}
+
+export default connect(null,mapDispatchToProps)(AddAddressScreen)
+
 

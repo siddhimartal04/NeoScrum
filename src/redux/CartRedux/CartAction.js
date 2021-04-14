@@ -7,12 +7,12 @@ import {
     
 } from './CartActionType'
 
-const addToCart = (item) => {
+const addToCart = (item,quantity) => {
     return {
         type: ADD_TO_CART,
         payload: {
             product: item,
-            quantity : 1
+            quantity : quantity
     }
 }
 }
@@ -38,10 +38,10 @@ const clearCart = () => {
     }
 }
 
-export const handleAddToCart = (item) => {
+export const handleAddToCart = (item,quantity) => {
     return (dispatch) => {
         
-        dispatch(addToCart(item))
+        dispatch(addToCart(item,quantity))
     }
 }
 

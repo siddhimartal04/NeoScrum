@@ -8,6 +8,11 @@ import { TouchableRipple } from 'react-native-paper'
 import { globalStyles } from '../styles/globalStyles'
 import { useNavigation } from '@react-navigation/native'
 
+/**
+ * @author Siddhi Martal
+ * @description This screen shows the list of all the previous orders made by the user
+ * @returns JSX with component that shows order details
+ */
 
 function OrderList() {
 

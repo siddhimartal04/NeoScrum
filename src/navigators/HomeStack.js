@@ -9,6 +9,8 @@ import { View ,Text} from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import { connect } from 'react-redux'
 import OrderSummary from '../screens/OrderSummary';
+import AddressList from '../screens/AddressList';
+import AddAddress from '../screens/AddAddress';
 const HomeStack = createStackNavigator();
 
 
@@ -99,7 +101,8 @@ function HomeStackScreen (props)  {
             }}/>
           <HomeStack.Screen name="My Cart" component={MyCart}/> 
           <HomeStack.Screen name="Order Summary" component={OrderSummary}/> 
-      
+          <HomeStack.Screen name="Address List" component={AddressList}/> 
+          <HomeStack.Screen name="AddAddress" component={AddAddress}/> 
     </HomeStack.Navigator>
     )
 }

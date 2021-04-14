@@ -8,7 +8,12 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux'
 import { handleLogout } from '../redux/userAction'
-
+/**
+ * @author Siddhi Martal
+ * @param {*} props uses props to display the profile image and name of the user logged in
+ * @description This screen shows the content for drawer navigation
+ * @returns JSX with drawer containing contaning navigation tabs to different screens of the app
+ */
  function DrawerContent(props) {
 
 
@@ -24,11 +29,21 @@ import { handleLogout } from '../redux/userAction'
                         (<Text style={styles.title}>NeoStore</Text>) 
                         : (
                         <View style={{justifyContent:'center',alignItems:'center'}}>
-                            <Image
+                           {
+                                props.userProfileImage ? ( 
+                                <Image
+                                source={{uri:props.userProfileImage}}
+                                style={{width:90,height:90,borderRadius:100}}
+                                
+                            />) : (
+                                <Image
                                 source={require('../assets/profilePic.jpeg')}
                                 style={{width:90,height:90}}
                                 
                             />
+                            )
+ }
+
                                 <Text style={{fontSize:25,textAlign:'center'}}>
                                 {props.email}
                             </Text>
@@ -263,7 +278,9 @@ const mapStateToProps = (state) => {
         isLogin: state.AuthUser.isLogin,
         email: state.AuthUser.email,
         firstName: state.AuthUser.firstName,
-        lastName: state.AuthUser.lastName
+        lastName: state.AuthUser.lastName,
+        
+        userProfileImage: state.AuthUser.userProfileImage
     }
 }
 
